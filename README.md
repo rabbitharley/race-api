@@ -420,3 +420,61 @@ Vous devez rendre :
 ---
 
 Bon développement !
+
+
+
+
+
+---
+
+## Livrable étudiant (Groupe de: Mame Diarra NDIAYE, Georgette Anna NDONG, Sonja DIA)
+
+### Lancer le projet
+
+1. Lancer Docker Desktop
+2. Démarrer la base de données :
+```bash
+docker compose up -d
+```
+3. Lancer l'application depuis IntelliJ ou :
+```bash
+mvn spring-boot:run
+```
+
+L'API est disponible sur : http://localhost:8080
+
+Adminer : http://localhost:8081
+
+### Endpoints implémentés
+
+#### Coureurs
+| Méthode | URL | Status |
+|---------|-----|--------|
+| GET | /runners | 200 |
+| GET | /runners/{id} | 200 / 404 |
+| POST | /runners | 201 / 400 |
+| PUT | /runners/{id} | 201 / 404 |
+| DELETE | /runners/{id} | 200 / 404 |
+| GET | /runners/{id}/races | 200 / 404 |
+
+#### Courses
+| Méthode | URL | Status |
+|---------|-----|--------|
+| GET | /races | 200 |
+| GET | /races?location=Paris | 200 (bonus) |
+| GET | /races/{id} | 200 / 404 |
+| POST | /races | 201 |
+| GET | /races/{id}/participants/count | 200 / 404 |
+
+#### Inscriptions
+| Méthode | URL | Status |
+|---------|-----|--------|
+| POST | /races/{raceId}/registrations | 201 / 404 / 409 |
+| GET | /races/{raceId}/registrations | 200 / 404 |
+
+### Règles métier implémentées
+
+- Email invalide → 400
+- Double inscription → 409
+- Course complète → 409
+- Ressource inexistante → 404
