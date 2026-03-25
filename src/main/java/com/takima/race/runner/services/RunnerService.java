@@ -30,35 +30,22 @@ public class RunnerService {
     }
 
     public Runner create(Runner runner) {
-        // Validation de l'email : doit contenir un @
         if (runner.getEmail() == null || !runner.getEmail().contains("@")) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid email address");
         }
         return runnerRepository.save(runner);
     }
 
-    public Runner update(Long id, Runner updatedRunner) {
-        // On vérifie que le coureur existe (lève 404 sinon)
-        Runner existing = getById(id);
-
-        // Validation de l'email
-        if (updatedRunner.getEmail() == null || !updatedRunner.getEmail().contains("@")) {
+    public Runner update(Long id, Runner runner) {
+        if (runner.getEmail() == null || !runner.getEmail().contains("@")) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid email address");
         }
-
-        // On met à jour les champs
-        existing.setFirstName(updatedRunner.getFirstName());
-        existing.setLastName(updatedRunner.getLastName());
-        existing.setEmail(updatedRunner.getEmail());
-        existing.setAge(updatedRunner.getAge());
-
+        Runner existing = getById(id);
+        existing.setFirstName(runner.getFirstName());
+        existing.setLastName(runner.getLastName());
+        existing.setEmail(runner.getEmail());
+        existing.setAge(runner.getAge());
         return runnerRepository.save(existing);
-    }
-
-    public void delete(Long id) {
-        // On vérifie que le coureur existe (lève 404 sinon)
-        getById(id);
-        runnerRepository.deleteById(id);
     }
 
     public void deleteById(Long id) {
