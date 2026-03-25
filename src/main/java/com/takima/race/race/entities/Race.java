@@ -1,13 +1,17 @@
 package com.takima.race.race.entities;
 
+import java.time.LocalDate;
+import java.util.Objects;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import java.time.LocalDate;
-import java.util.Objects;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "races")
 public class Race {
 
     @Id
@@ -17,6 +21,8 @@ public class Race {
     private String name;
     private LocalDate date;
     private String location;
+
+    @Column(name = "max_participants")
     private Integer maxParticipants;
 
     @Override

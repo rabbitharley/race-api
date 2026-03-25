@@ -1,17 +1,27 @@
 spring:
   application:
     name: race
+  
   datasource:
     url: jdbc:postgresql://localhost:5432/race_db
     username: race
     password: race
+    driver-class-name: org.postgresql.Driver
+
   jpa:
     hibernate:
-      ddl-auto: validate
+      ddl-auto: none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
     show-sql: true
-  web:
-    error:
-      include-message: always
+    properties:
+      hibernate:
+        format_sql: true
 
   flyway:
     enabled: true
+    clean-on-validation-error: true
+
+  web:
+    error:
+      include-message: always

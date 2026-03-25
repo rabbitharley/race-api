@@ -1,16 +1,17 @@
 package com.takima.race.registration.services;
 
+import java.time.LocalDate;
+import java.util.List;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
+
 import com.takima.race.race.entities.Race;
 import com.takima.race.race.repositories.RaceRepository;
 import com.takima.race.registration.entities.Registration;
 import com.takima.race.registration.repositories.RegistrationRepository;
 import com.takima.race.runner.repositories.RunnerRepository;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
-
-import java.time.LocalDate;
-import java.util.List;
 
 @Service
 public class RegistrationService {
@@ -53,6 +54,7 @@ public class RegistrationService {
         Registration registration = new Registration();
         registration.setRunnerId(runnerId);
         registration.setRaceId(raceId);
+        registration.setRegistrationDate(LocalDate.now());
         registration.setRegistrationDate(LocalDate.now());
         return registrationRepository.save(registration);
     }
